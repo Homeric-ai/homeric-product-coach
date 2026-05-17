@@ -4,45 +4,48 @@ A Claude Code plugin that gives product leaders expert-tuned coaching on their O
 
 ## What you get
 
-Three slash commands the moment you install:
+When this plugin is installed, three slash commands plus a connected MCP server:
 
-| Command | What it does |
+| Slash command | What it does |
 |---|---|
-| `/assess-okrs` | Score an OKR set 0-100 across five dimensions. Identify the 1-2 issues most worth fixing. Free. |
-| `/review-okrs` | Detailed coaching review — what is strong, what is weak, why, and how to fix. Free. |
-| `/propose-okrs` | Draft 3-5 methodology-grounded OKR proposals. Requires the Product Strategy pack. |
+| `/homeric-product-coach:assess-okrs <okr-set>` | Score an OKR set 0-100 across five dimensions; identify the 1-2 issues most worth fixing. Free. |
+| `/homeric-product-coach:review-okrs <okr-set>` | Detailed coaching review — what is strong, weak, why, and how to fix. Free. |
+| `/homeric-product-coach:propose-okrs <context>` | Generate 3-5 methodology-grounded OKR proposals. Requires the Product Strategy pack. |
 
-The methodology applied behind every command is grounded in:
+The plugin also registers an MCP server (`homeric-skills`) which exposes the underlying tools (`homeric_assess_product_okrs`, `homeric_review_product_okrs`, `homeric_propose_product_okrs`) and prompts directly. The model can invoke them autonomously when context matches — the slash commands are convenience shortcuts.
+
+The methodology applied behind every call is grounded in:
 
 - **Marty Cagan** (Silicon Valley Product Group) — *INSPIRED*, *EMPOWERED*, *TRANSFORMED*. First principles for product strategy.
 - **Christina Wodtke** — *Radical Focus* (2nd edition). Operational mechanics for OKRs.
 
-The Homeric team has distilled and continuously refines these into a structured rubric the plugin's MCP server applies on every call.
+The Homeric team has distilled and continuously refines these into a structured rubric the MCP server applies on every call.
 
-## Install
+## Install (local, for testing)
 
-In Claude Code, install from the plugin marketplace:
+Clone this repo, then point Claude Code at it directly:
 
 ```bash
-claude /plugin install homeric-ai/homeric-product-coach
+git clone https://github.com/Homeric-ai/homeric-product-coach.git
+claude --plugin-dir ./homeric-product-coach
 ```
 
-Or add manually in your `~/.claude/settings.json`:
+The first time you invoke a slash command or the MCP server starts a tool call, Claude Code will open an OAuth consent page. Sign in with your Homeric account (or create one — free).
 
-```json
-{
-  "plugins": ["homeric-ai/homeric-product-coach"]
-}
-```
+Once Claude Code is running, type `/help` to see the plugin's commands listed under the `homeric-product-coach:` namespace.
 
-The first time you invoke any of the slash commands, Claude Code will open an OAuth consent page. Sign in with your Homeric account (or create one — free). The plugin then has Bearer-token access to the Homeric Skills MCP service.
+If you make changes to the plugin while Claude Code is running, run `/reload-plugins` to pick them up without restarting.
+
+## Install (from marketplace)
+
+*Coming soon* — the plugin will be available in the official Claude Code marketplace.
 
 ## Pricing
 
 | Tier | What's included | Price |
 |---|---|---|
-| **Free** | `/assess-okrs`, `/review-okrs`, full methodology access via MCP | $0 |
-| **Product Strategy** | Adds `/propose-okrs` and proposal-generation tools | $199 / user / month |
+| **Free** | `/homeric-product-coach:assess-okrs`, `/homeric-product-coach:review-okrs`, full MCP methodology access | $0 |
+| **Product Strategy** | Adds `/homeric-product-coach:propose-okrs` and proposal-generation tools | $199 / user / month |
 | **Product Discovery** | (forthcoming) Opportunity prioritization, evidence synthesis, experiment design | $299 / user / month |
 | **Product Engineering** | (forthcoming) Spec coaching, telemetry framing, delivery diagnostics | $599 / user / month |
 
@@ -56,27 +59,27 @@ This plugin is a thin Claude Code distribution wrapper. It contains no methodolo
 
 ```
 Claude Code (this plugin) ──MCP──> mcp.homeric.ai
-                                          │
-                                          ▼
+                                         │
+                                         ▼
                                   managed methodology
                                   + entitlements + telemetry
 ```
 
-When you invoke `/assess-okrs`, Claude Code calls the `assess_product_okrs` MCP prompt on the Homeric Skills server. The server returns the methodology bundle and the apply-it instructions; the model then applies it to your OKR set and emits a structured assessment.
+When you invoke `/homeric-product-coach:assess-okrs`, Claude Code substitutes `$ARGUMENTS` into the command body and invokes the `homeric_assess_product_okrs` MCP tool. The server returns the methodology bundle and apply-it instructions; the model then applies it to your OKR set and emits a structured assessment.
 
 ## Compatibility
 
 | Client | Status |
 |---|---|
-| Claude Code | ✅ Native plugin install |
-| Claude Desktop | ✅ Works via the MCP connector (add `mcp.homeric.ai/mcp` as an MCP server) |
-| Cursor, Windsurf, ChatGPT Dev Mode, Atlassian Rovo | ✅ Add the MCP connector URL manually; the plugin's slash commands are Claude Code-only |
+| Claude Code | ✅ Native plugin install (`--plugin-dir` or marketplace) |
+| Claude Desktop | ✅ Works via the raw MCP connector — add `https://mcp.homeric.ai/mcp` as an MCP server in your Claude Desktop config (the slash commands here are Claude Code-only, but the underlying tools are available everywhere) |
+| Cursor, Windsurf, ChatGPT Dev Mode, Atlassian Rovo | ✅ Add `https://mcp.homeric.ai/mcp` as an MCP server; tools auto-discover |
 
 ## Privacy
 
-- Your OKR text is sent to `mcp.homeric.ai` to be assessed/reviewed/proposed.
+- Your OKR text is sent to `mcp.homeric.ai` for the methodology to be applied.
 - Each call is logged for billing and quality (per-user activity log).
-- No third-party LLM provider sees your input — the methodology is applied by your Claude Code session against the rubric the server returns.
+- The methodology body and your input are processed by your own Claude Code session against the rubric the server returns; no third-party LLM provider intermediates.
 - Full policy: [homeric.ai/privacy](https://homeric.ai/privacy)
 
 ## Support
@@ -87,4 +90,4 @@ When you invoke `/assess-okrs`, Claude Code calls the `assess_product_okrs` MCP 
 
 ## License
 
-The plugin wrapper code (this repo) is Apache 2.0. The methodology served at `mcp.homeric.ai` is proprietary to Homeric AI and licensed under the [Homeric Skills License v1.0](https://homeric.ai/skills/license) — free to use as a methodology consumer, no redistribution rights.
+The plugin wrapper code (this repo) is Apache 2.0. The methodology served at `mcp.homeric.ai` is proprietary to Homeric AI and licensed under the [Homeric Skills License v1.0](https://homeric.ai/skills/license) — free for use as a methodology consumer, no redistribution rights. See [LICENSE](./LICENSE).

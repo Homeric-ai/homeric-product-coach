@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "homeric-skills": {
+      "type": "http",
+      "url": "https://mcp.homeric.ai/mcp"
+    }
+  }
+}

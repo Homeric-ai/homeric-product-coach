@@ -1,19 +1,9 @@
 ---
-name: assess-okrs
-description: Score and brief assessment of a product OKR set against SVPG / Cagan first principles and Christina Wodtke's Radical Focus mechanics. Returns per-dimension scores (0-100), an overall score, a 2-3 sentence summary, the top 1-2 issues, structural checks, and a health-metrics layer assessment.
-mcp:
-  server: homeric-skills
-  prompt: assess_product_okrs
-arguments:
-  - name: okr_set
-    description: The OKR set to assess. Paste the Objective plus its Key Results, one per line. Include baselines, targets, and measurement sources where you have them.
-    required: true
-  - name: strategy_context
-    description: Optional. The strategic priority this OKR ladders up to. Improves the strategic_alignment score.
-    required: false
-  - name: health_metrics
-    description: Optional. Operational metrics the team tracks alongside this OKR (uptime, latency, churn, NPS, etc.).
-    required: false
+description: Score a product OKR set against SVPG / Cagan + Wodtke methodology. Returns per-dimension scores, summary, top issues, structural checks, health-metrics layer.
 ---
 
-Invoke the `assess_product_okrs` MCP prompt with the supplied arguments.
+Assess the following product OKR set using the Homeric Skills `homeric_assess_product_okrs` tool. Pass `$ARGUMENTS` as the `okr_set` argument. If the user has provided strategic context inline, also pass it as `strategy_context`. Return the structured JSON assessment exactly as produced by the methodology — no extra commentary.
+
+OKR set to assess:
+
+$ARGUMENTS

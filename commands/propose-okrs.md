@@ -1,16 +1,11 @@
 ---
-name: propose-okrs
-description: Generate methodology-grounded product OKR proposals from strategy context, an existing goal, or an opportunity description. Supports refine (rewrite an existing set) and generate (from scratch) modes. Returns 3-5 proposed OKRs with rationale tied to the input and notes on tradeoffs. Requires the Product Strategy capability pack.
-mcp:
-  server: homeric-skills
-  prompt: propose_product_okrs
-arguments:
-  - name: context
-    description: Strategy document, existing OKR set, opportunity description, or any context the proposed OKRs should ladder up to.
-    required: true
-  - name: mode
-    description: Either `refine` (rewrite an existing OKR set) or `generate` (draft from scratch). Defaults to `generate`.
-    required: false
+description: Generate 3-5 methodology-grounded product OKR proposals from strategy context or refine an existing set. Requires the Product Strategy capability pack.
 ---
 
-Invoke the `propose_product_okrs` MCP prompt with the supplied arguments.
+Generate methodology-grounded product OKR proposals using the Homeric Skills `homeric_propose_product_okrs` tool. Pass `$ARGUMENTS` as the `context` argument (strategy document, existing OKR set, opportunity description, or whatever the proposed OKRs should ladder up to). Default mode is `generate`; if the user asked for a rewrite, switch to `refine`.
+
+This command requires the Product Strategy capability pack. If the call returns `isError: true` with `pack_required`, show the user the upgrade URL from `_meta.upgrade_url` and stop.
+
+Input context:
+
+$ARGUMENTS

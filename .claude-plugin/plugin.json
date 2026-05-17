@@ -1,0 +1,13 @@
+{
+  "name": "homeric-product-coach",
+  "description": "Methodology-grounded coaching for product OKRs. Assess, review, and propose product OKRs using SVPG (Cagan) + Christina Wodtke's Radical Focus mechanics, applied by an expert-tuned MCP server at mcp.homeric.ai.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Homeric AI",
+    "email": "hello@homeric.ai",
+    "url": "https://homeric.ai"
+  },
+  "homepage": "https://homeric.ai/product-coach",
+  "repository": "https://github.com/Homeric-ai/homeric-product-coach",
+  "license": "Apache-2.0"
+}
