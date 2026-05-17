@@ -1,0 +1,36 @@
+                                 Apache License
+                           Version 2.0, January 2004
+                        http://www.apache.org/licenses/
+
+   Licensed to Homeric AI under the Apache License, Version 2.0 (the
+   "License"); you may not use this file except in compliance with the
+   License. You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+   implied. See the License for the specific language governing
+   permissions and limitations under the License.
+
+   Copyright 2026 Homeric AI
+
+   ─────────────────────────────────────────────────────────────────────
+
+   Scope of this license
+
+   This Apache 2.0 license covers ONLY the plugin wrapper code in this
+   repository: plugin.json, marketplace.json, mcp/connector.json, and
+   the slash-command files under commands/. These are configuration
+   metadata that wire Claude Code to the Homeric Skills MCP service.
+
+   The methodology served at https://mcp.homeric.ai is NOT covered by
+   this license. The methodology content (rubrics, signals, anti-
+   patterns, references, eval suites) is proprietary to Homeric AI and
+   licensed separately under the Homeric Skills License v1.0 — see
+   https://homeric.ai/skills/license for terms.
+
+   Using this plugin grants you the right to invoke the Homeric Skills
+   service per the Homeric Skills License v1.0. It does not grant you
+   the right to extract, redistribute, or reproduce the methodology.

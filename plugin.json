@@ -1,0 +1,40 @@
+{
+  "$schema": "https://claude.com/schemas/plugin.schema.json",
+  "name": "homeric-product-coach",
+  "version": "0.1.0",
+  "displayName": "Homeric Product Coach",
+  "description": "Methodology-grounded coaching for product strategy and OKRs. Assess, review, and propose product OKRs with SVPG (Cagan) + Christina Wodtke's Radical Focus mechanics applied by an expert-tuned MCP server.",
+  "author": {
+    "name": "Homeric AI",
+    "email": "hello@homeric.ai",
+    "url": "https://homeric.ai"
+  },
+  "homepage": "https://homeric.ai/product-coach",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Homeric-ai/homeric-product-coach"
+  },
+  "license": "Apache-2.0",
+  "keywords": [
+    "product-strategy",
+    "okrs",
+    "svpg",
+    "cagan",
+    "wodtke",
+    "radical-focus",
+    "product-management",
+    "coaching"
+  ],
+  "categories": [
+    "productivity",
+    "knowledge-work"
+  ],
+  "mcp": {
+    "connector": "mcp/connector.json"
+  },
+  "commands": [
+    "commands/assess-okrs.md",
+    "commands/review-okrs.md",
+    "commands/propose-okrs.md"
+  ]
+}
