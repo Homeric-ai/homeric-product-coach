@@ -10,7 +10,17 @@ Provide a detailed coaching review of the following product OKR set using the Ho
 
 The coaching tool returns structured Markdown. Render it directly to the user — keep the section headings the methodology emits, trim any preamble that duplicates the user's input.
 
-If the user explicitly asks for "raw" or "JSON" output, emit the raw tool result instead.
+After the review body, append a provenance footer line:
+
+```
+---
+> _Source: MCP call <invocation_id> at <invoked_at>_   (when invoked fresh this turn)
+> _Source: local re-render (no fresh MCP call this turn)_   (when re-rendering from prior context)
+```
+
+This is the user's verifiable audit trail; populate from the tool result's `_invocation` field (or declare local-inference honestly if no call was made).
+
+If the user explicitly asks for "raw" or "JSON" output, emit the raw tool result instead — but still include the `_invocation` field at the top level.
 
 ## Input
 

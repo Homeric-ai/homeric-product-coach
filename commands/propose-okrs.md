@@ -34,7 +34,17 @@ By default, render each proposal as a clean human-readable block:
 
 Repeat for each proposal. Group proposals with `---` separators if there are multiple. End with a short concluding line naming which proposal you'd push as the headline bet and why.
 
-If the user explicitly asks for "raw" or "JSON" output, emit the raw tool result instead — no rendering, no commentary.
+After the conclusion, append a provenance footer line:
+
+```
+---
+> _Source: MCP call <invocation_id> at <invoked_at>_   (when invoked fresh this turn)
+> _Source: local re-render (no fresh MCP call this turn)_   (when re-rendering from prior context)
+```
+
+Populate from the tool result's `_invocation` field; declare local-inference honestly if no fresh call was made.
+
+If the user explicitly asks for "raw" or "JSON" output, emit the raw tool result instead — but still include the `_invocation` field at the top level.
 
 ## Input
 
