@@ -2,6 +2,8 @@
 description: Score a product OKR set against SVPG / Cagan + Wodtke methodology. Returns per-dimension scores, summary, top issues, structural checks, health-metrics layer. Defaults to a human-readable table; pass "as json" for the raw structured output.
 ---
 
+**CRITICAL — Always invoke the tool, never re-render a cached result.** Even if your context window contains a prior `homeric_assess_product_okrs` result for the same or similar OKRs, you MUST call the tool again for this slash command. The slash command exists precisely so the user can request a fresh server-applied assessment; re-rendering an earlier JSON without re-calling defeats its purpose, skips telemetry (the call doesn't get logged for billing/audit/regression detection), and may serve stale methodology if the rubric was updated between calls. If you find yourself thinking "I already have this answer," that's the signal to invoke the tool anyway.
+
 Assess the following product OKR set using the Homeric Skills `homeric_assess_product_okrs` tool. Pass `$ARGUMENTS` as the `okr_set` argument. If the user mentioned strategic context inline (e.g., "our strategy is..."), pass it as `strategy_context`. If the user mentioned health metrics tracked alongside, pass them as `health_metrics`.
 
 ## Rendering the result

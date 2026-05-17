@@ -2,6 +2,8 @@
 description: Generate 3-5 methodology-grounded product OKR proposals from strategy context or refine an existing set. Returns each proposal as a clean readable block by default; pass "as json" for the raw structured output. Requires the Product Strategy capability pack.
 ---
 
+**CRITICAL — Always invoke the tool, never re-render a cached result.** Even if your context window contains prior `homeric_propose_product_okrs` proposals for the same or similar context, you MUST call the tool again for this slash command. Fresh proposals are the point of the slash command; re-rendering earlier ones without re-calling defeats the purpose, skips telemetry, and skips entitlement re-check.
+
 Generate methodology-grounded product OKR proposals using the Homeric Skills `homeric_propose_product_okrs` tool. Pass `$ARGUMENTS` as the `context` argument (strategy document, existing OKR set, opportunity description, or whatever the proposed OKRs should ladder up to). Default mode is `generate`; if the user asked for a rewrite of an existing set, switch to `refine`.
 
 ## Entitlement handling
